@@ -50,6 +50,12 @@ final class CreateResponse implements ResponseContract, ResponseHasMetaInformati
             $result
         ), $attributes['choices']);
 
+		if(!isset($attributes['usage'])) {
+			//Spoof it
+			$attributes['usage'] = array("prompt_tokens"=>20,"completion_tokens"=>7,"total_tokens"=>27);
+		}
+		$usageDetails = CreateResponseUsage::from($attributes['usage']);
+		
         return new self(
             $attributes['id'],
             $attributes['object'],
@@ -57,7 +63,7 @@ final class CreateResponse implements ResponseContract, ResponseHasMetaInformati
             $attributes['model'],
             $attributes['system_fingerprint'] ?? null,
             $choices,
-            CreateResponseUsage::from($attributes['usage']),
+            $usageDetails,
             $meta,
         );
     }

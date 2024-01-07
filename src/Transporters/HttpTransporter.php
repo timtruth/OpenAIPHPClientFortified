@@ -58,8 +58,10 @@ final class HttpTransporter implements TransporterContract
 
         try {
             /** @var array{error?: array{message: string, type: string, code: string}} $data */
-            $data = json_decode($contents, true, flags: JSON_THROW_ON_ERROR);
+            //echo "The contents are: " . $contents;
+			$data = json_decode(trim($contents), true, flags: JSON_THROW_ON_ERROR);
         } catch (JsonException $jsonException) {
+			echo "The contents were: " . $contents;
             throw new UnserializableResponse($jsonException);
         }
 
