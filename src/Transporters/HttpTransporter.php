@@ -61,7 +61,7 @@ final class HttpTransporter implements TransporterContract
             //echo "The contents are: " . $contents;
 			$data = json_decode(trim($contents), true, flags: JSON_THROW_ON_ERROR);
         } catch (JsonException $jsonException) {
-			echo "The contents were: " . $contents;
+			//echo "The contents were: " . $contents;
             throw new UnserializableResponse($jsonException);
         }
 
